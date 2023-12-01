@@ -554,3 +554,39 @@ function showSlides() {
   dots[slideIndex - 1].className += " active";
   setTimeout(showSlides, 10000); // Change slide every 10 seconds
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Add event listener for dot clicks
+  var dots = document.querySelectorAll(".dot");
+
+  dots.forEach(function (dot, index) {
+    dot.addEventListener("click", function () {
+      showSlide(index + 1);
+    });
+  });
+
+  // Function to show a specific slide
+  function showSlide(n) {
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+
+    if (n > slides.length) {
+      slideIndex = 1;
+    } else if (n < 1) {
+      slideIndex = slides.length;
+    } else {
+      slideIndex = n;
+    }
+
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+
+    for (var i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+  }
+});
